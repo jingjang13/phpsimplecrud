@@ -7,14 +7,13 @@ $mahasiswa = new Mahasiswa();
 // Mengambil data mahasiswa dari form edit menggunakan metode POST dan menyimpannya dalam array
 $dataMahasiswa = [
     'id' => $_POST['id'],
-    'nim' => $_POST['nim'],
-    'nama' => $_POST['nama'],
-    'prodi' => $_POST['prodi'],
+    'nm_pelanggan' => $_POST['nm_pelanggan'],
     'alamat' => $_POST['alamat'],
-    'provinsi' => $_POST['provinsi'],
     'email' => $_POST['email'],
     'telp' => $_POST['telp'],
-    'status' => $_POST['status']
+    'mn_pesanan' => $_POST['mn_pesanan'],
+    'jumlah_pesanan' => $_POST['jumlah_pesanan'],
+    'tgl_pengiriman' => $_POST['tgl_pengiriman']
 ];
 // Memanggil method editMahasiswa untuk mengupdate data mahasiswa dengan parameter array $dataMahasiswa
 $edit = $mahasiswa->editMahasiswa($dataMahasiswa);

@@ -16,43 +16,41 @@
 
 
 -- Dumping database structure for db_simplecrud
-CREATE DATABASE IF NOT EXISTS `db_simplecrud` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
-USE `db_simplecrud`;
+CREATE DATABASE IF NOT EXISTS `db_cookiesjoy` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `db_cookiesjoy`;
 
 -- Dumping structure for table db_simplecrud.tb_mahasiswa
-CREATE TABLE IF NOT EXISTS `tb_mahasiswa` (
-  `id_mhs` int(11) NOT NULL AUTO_INCREMENT,
-  `nim_mhs` char(12) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `nama_mhs` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `prodi_mhs` char(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+CREATE TABLE IF NOT EXISTS `tb_pelanggan` (
+  `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT,
+  `telp_pelanggan` char(12) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `nama_pelanggan` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `menu_cookies` char(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provinsi` mediumint(3) NOT NULL,
+  `transaksi` mediumint(3) NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telp` char(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `date_trx` date COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `status_mhs` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_mhs`)
+  PRIMARY KEY (`id_pelanggan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db_simplecrud.tb_mahasiswa: ~0 rows (approximately)
 
 -- Dumping structure for table db_simplecrud.tb_prodi
-CREATE TABLE IF NOT EXISTS `tb_prodi` (
-  `kode_prodi` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_prodi` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`kode_prodi`)
+CREATE TABLE IF NOT EXISTS `tb_trx` (
+  `id_trx` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_pelanggan` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_trx` date COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_trx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db_simplecrud.tb_prodi: ~9 rows (approximately)
-INSERT INTO `tb_prodi` (`kode_prodi`, `nama_prodi`) VALUES
-	('ARS', 'Arsitek'),
-	('BD', 'Bisnis Digital'),
-	('DI', 'Desain Interior'),
-	('DKV', 'Desain Komunikasi Visual'),
-	('DM', 'Desain Mode'),
-	('MBD', 'Magister Bisnis Digital'),
-	('MDS', 'Magister Desain'),
-	('MR', 'Manajemen Ritel'),
-	('STI', 'Sistem dan Teknologi Informasi');
+INSERT INTO `tb_menu` (`id_cookies`, `nm_cookies`) VALUES
+	('1', 'Choco Chip Clasic'),
+	('2', 'Red Velvet Cookies'),
+	('3', 'Matcha Delight'),
+	('4', 'Oatmeal Honey Cruach'),
+	('5', 'Peanut Butter Bliss'),
+	('6', 'Assorted Gift Bok (6 varian)'),
 
 -- Dumping structure for table db_simplecrud.tb_provinsi
 CREATE TABLE IF NOT EXISTS `tb_provinsi` (

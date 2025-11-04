@@ -1,1 +1,8 @@
 /* Taruh CSS Custom Disini */
+
+.bg-body-secondary {
+    background-color: rgb(184, 147, 83)!important;
+}
+.bg-body-tertiary {
+    background-color: rgb(217, 172, 114)!important;
+}
