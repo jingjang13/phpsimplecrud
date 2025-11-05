@@ -36,13 +36,13 @@
                 </li>
                 <li class="nav-header">MASTER DATA</li>
                 <li class="nav-item">
-                    <a href="master-prodi-list.php" class="nav-link">
+                    <a href="master-cookies-list.php" class="nav-link">
                         <i class="nav-icon bi bi-building"></i>
                         <p>Menu Cookie</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="master-provinsi-list.php" class="nav-link">
+                    <a href="master-pelanggan-list.php" class="nav-link">
                         <i class="nav-icon bi bi-briefcase-fill"></i>
                         <p>Pelanggan</p>
                     </a>

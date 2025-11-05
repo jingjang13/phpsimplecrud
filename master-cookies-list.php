@@ -5,16 +5,16 @@ include_once 'config/class-master.php';
 $master = new MasterData();
 if(isset($_GET['status'])){
 	if($_GET['status'] == 'inputsuccess'){
-		echo "<script>alert('Data provinsi berhasil ditambahkan.');</script>";
+		echo "<script>alert('Daftar menu cookies berhasil ditambahkan.');</script>";
 	} else if($_GET['status'] == 'editsuccess'){
-		echo "<script>alert('Data provinsi berhasil diubah.');</script>";
+		echo "<script>alert('Daftar menu cookies berhasil diubah.');</script>";
 	} else if($_GET['status'] == 'deletesuccess'){
-		echo "<script>alert('Data provinsi berhasil dihapus.');</script>";
+		echo "<script>alert('Daftar menu cookies berhasil dihapus.');</script>";
 	} else if($_GET['status'] == 'deletefailed'){
-		echo "<script>alert('Gagal menghapus data provinsi. Silakan coba lagi.');</script>";
+		echo "<script>alert('Gagal menghapus daftar menu cookies. Silakan coba lagi.');</script>";
 	}
 }
-$dataPelanggan = $master->getPelanggan();
+$dataCookies = $master->getCookies();
 
 ?>
 <!doctype html>
@@ -37,12 +37,12 @@ $dataPelanggan = $master->getPelanggan();
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-6">
-								<h3 class="mb-0">Data Pelanggan</h3>
+								<h3 class="mb-0">Data Menu Cookies</h3>
 							</div>
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-end">
 									<li class="breadcrumb-item"><a href="index.php">Beranda</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Master Provinsi</li>
+									<li class="breadcrumb-item active" aria-current="page">Master Cookies</li>
 								</ol>
 							</div>
 						</div>
@@ -55,7 +55,7 @@ $dataPelanggan = $master->getPelanggan();
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Daftar Pelanggan</h3>
+										<h3 class="card-title">Daftar Menu Cookies</h3>
 										<div class="card-tools">
 											<button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" title="Collapse">
 												<i data-lte-icon="expand" class="bi bi-plus-lg"></i>
@@ -71,24 +71,26 @@ $dataPelanggan = $master->getPelanggan();
 											<thead>
 												<tr>
 													<th>No</th>
+													<th>Kode</th>
 													<th>Nama</th>
 													<th class="text-center">Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php
-													if(count($dataPelanggan) == 0){
+													if(count($dataCookies) == 0){
 													    echo '<tr class="align-middle">
-															<td colspan="3" class="text-center">Tidak ada data pelanggan.</td>
+															<td colspan="4" class="text-center">Tidak ada data menu cookies.</td>
 														</tr>';
 													} else {
-														foreach ($dataPelanggan as $index => $prelanggan){
+														foreach ($dataCookies as $index => $cookies){
 															echo '<tr class="align-middle">
 																<td>'.($index + 1).'</td>
-																<td>'.$pelanggan['nama'].'</td>
+																<td>'.$cookies['kode_menu'].'</td>
+																<td>'.$cookies['daftar_menu'].'</td>
 																<td class="text-center">
-																	<button type="button" class="btn btn-sm btn-warning me-1" onclick="window.location.href=\'master-provinsi-edit.php?id='.$pelanggan['id'].'\'"><i class="bi bi-pencil-fill"></i> Edit</button>
-																	<button type="button" class="btn btn-sm btn-danger" onclick="if(confirm(\'Yakin ingin menghapus data Menu Cookies ini?\')){window.location.href=\'proses/proses-provinsi.php?aksi=deleteprovinsi&id='.$pelanggan['id'].'\'}"><i class="bi bi-trash-fill"></i> Hapus</button>
+																	<button type="button" class="btn btn-sm btn-warning me-1" onclick="window.location.href=\'master-cookies-edit.php?kode='.$cookies['kode_menu'].'\'"><i class="bi bi-pencil-fill"></i> Edit</button>
+																	<button type="button" class="btn btn-sm btn-danger" onclick="if(confirm(\'Yakin ingin menghapus daftar menu cookies?\')){window.location.href=\'proses/proses-cookies.php?aksi=deletecookies&kode='.$cookies['kode_menu'].'\'}"><i class="bi bi-trash-fill"></i> Hapus</button>
 																</td>
 															</tr>';
 														}
@@ -98,7 +100,7 @@ $dataPelanggan = $master->getPelanggan();
 										</table>
 									</div>
 									<div class="card-footer">
-										<button type="button" class="btn btn-primary" onclick="window.location.href='master-provinsi-input.php'"><i class="bi bi-plus-lg"></i> Tambah Pelanggan</button>
+										<button type="button" class="btn btn-primary" onclick="window.location.href='master-cookies-input.php'"><i class="bi bi-plus-lg"></i> Tambah Daftar cookies</button>
 									</div>
 								</div>
 							</div>

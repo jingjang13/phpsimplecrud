@@ -5,16 +5,16 @@ include_once 'config/class-master.php';
 $master = new MasterData();
 if(isset($_GET['status'])){
 	if($_GET['status'] == 'inputsuccess'){
-		echo "<script>alert('Data prodi berhasil ditambahkan.');</script>";
+		echo "<script>alert('Data pelanggan berhasil ditambahkan.');</script>";
 	} else if($_GET['status'] == 'editsuccess'){
-		echo "<script>alert('Data prodi berhasil diubah.');</script>";
+		echo "<script>alert('Data pelanggan berhasil diubah.');</script>";
 	} else if($_GET['status'] == 'deletesuccess'){
-		echo "<script>alert('Data prodi berhasil dihapus.');</script>";
+		echo "<script>alert('Data pelanggan berhasil dihapus.');</script>";
 	} else if($_GET['status'] == 'deletefailed'){
-		echo "<script>alert('Gagal menghapus data prodi. Silakan coba lagi.');</script>";
+		echo "<script>alert('Gagal menghapus data pelanggan. Silakan coba lagi.');</script>";
 	}
 }
-$dataCookies = $master->getCookies();
+$dataPelanggan = $master->getPelanggan();
 
 ?>
 <!doctype html>
@@ -37,12 +37,12 @@ $dataCookies = $master->getCookies();
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-6">
-								<h3 class="mb-0">Menu Cookies</h3>
+								<h3 class="mb-0">Data Member</h3>
 							</div>
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-end">
 									<li class="breadcrumb-item"><a href="index.php">Beranda</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Master Prodi</li>
+									<li class="breadcrumb-item active" aria-current="page">Master Member</li>
 								</ol>
 							</div>
 						</div>
@@ -55,7 +55,7 @@ $dataCookies = $master->getCookies();
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Daftar Menu Cookies</h3>
+										<h3 class="card-title">Daftar Member</h3>
 										<div class="card-tools">
 											<button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" title="Collapse">
 												<i data-lte-icon="expand" class="bi bi-plus-lg"></i>
@@ -71,26 +71,24 @@ $dataCookies = $master->getCookies();
 											<thead>
 												<tr>
 													<th>No</th>
-													<th>Kode</th>
 													<th>Nama</th>
 													<th class="text-center">Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php
-													if(count($dataCookies) == 0){
+													if(count($dataPelanggan) == 0){
 													    echo '<tr class="align-middle">
-															<td colspan="4" class="text-center">Tidak ada menu.</td>
+															<td colspan="3" class="text-center">Tidak ada data pelanggan.</td>
 														</tr>';
 													} else {
-														foreach ($dataCookies as $index => $cookies){
+														foreach ($dataPelanggan as $index => $p){
 															echo '<tr class="align-middle">
 																<td>'.($index + 1).'</td>
-																<td>'.$cookies['id'].'</td>
-																<td>'.$cookies['nama'].'</td>
+																<td>'.$p['nm_pelanggan'].'</td>
 																<td class="text-center">
-																	<button type="button" class="btn btn-sm btn-warning me-1" onclick="window.location.href=\'master-prodi-edit.php?id='.$cookies['id'].'\'"><i class="bi bi-pencil-fill"></i> Edit</button>
-																	<button type="button" class="btn btn-sm btn-danger" onclick="if(confirm(\'Yakin ingin menghapus data program studi ini?\')){window.location.href=\'proses/proses-prodi.php?aksi=deleteprodi&id='.$cookies['id'].'\'}"><i class="bi bi-trash-fill"></i> Hapus</button>
+																	<button type="button" class="btn btn-sm btn-warning me-1" onclick="window.location.href=\'master-pelanggan-edit.php?id='.$p['id_pelanggan'].'\'"><i class="bi bi-pencil-fill"></i> Edit</button>
+																	<button type="button" class="btn btn-sm btn-danger" onclick="if(confirm(\'Yakin ingin menghapus data Menu Cookies ini?\')){window.location.href=\'proses/proses-pelanggan.php?aksi=deletepelanggan&id='.$p['id_pelanggan'].'\'}"><i class="bi bi-trash-fill"></i> Hapus</button>
 																</td>
 															</tr>';
 														}
@@ -100,7 +98,7 @@ $dataCookies = $master->getCookies();
 										</table>
 									</div>
 									<div class="card-footer">
-										<button type="button" class="btn btn-primary" onclick="window.location.href='master-prodi-input.php'"><i class="bi bi-plus-lg"></i> Tambah Prodi</button>
+										<button type="button" class="btn btn-primary" onclick="window.location.href='master-pelanggan-input.php'"><i class="bi bi-plus-lg"></i> Tambah Pelanggan</button>
 									</div>
 								</div>
 							</div>

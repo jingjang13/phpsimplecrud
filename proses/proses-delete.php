@@ -1,13 +1,13 @@
 <?php
 
-// Memasukkan file class-mahasiswa.php untuk mengakses class Mahasiswa
-include_once '../config/class-mahasiswa.php';
-// Membuat objek dari class Mahasiswa
-$mahasiswa = new Mahasiswa();
-// Mengambil id mahasiswa dari parameter GET
+// Memasukkan file class-cookiejoy.php untuk mengakses class cookiejoy
+include_once '../config/class-cookiejoy.php';
+// Membuat objek dari class cookiejoy
+$cookiejoy = new Cookiejoy();
+// Mengambil id cookiejoy dari parameter GET
 $id = $_GET['id'];
-// Memanggil method deleteMahasiswa untuk menghapus data mahasiswa berdasarkan id
-$delete = $mahasiswa->deleteMahasiswa($id);
+// Memanggil method deletecookiejoy untuk menghapus data cookiejoy berdasarkan id
+$delete = $cookiejoy->deleteCookiejoy($id);
 // Mengecek apakah proses delete berhasil atau tidak - true/false
 if($delete){
     // Jika berhasil, redirect ke halaman data-list.php dengan status deletesuccess

@@ -2,13 +2,18 @@
 
 include_once 'config/class-master.php';
 $master = new MasterData();
-// Mengambil daftar program studi, provinsi, dan status mahasiswa
-$prodiList = $master->getCookies();
-// Mengambil daftar provinsi
-$provinsiList = $master->getPelanggan();
-// Mengambil daftar status mahasiswa
+// Mengambil daftar cookies dan pelanggan
+$cookiesList = $master->getCookies();
+$pelangganList = $master->getPelanggan();
+
 // Menampilkan alert berdasarkan status yang diterima melalui parameter GET
+if(isset($_GET['status'])){
+	if($_GET['status'] == 'failed'){
+		echo "<script>alert('Gagal menambahkan data cookiejoy. Silakan coba lagi.');</script>";
+	}
+}
 ?>
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -62,40 +67,35 @@ $provinsiList = $master->getPelanggan();
 									    <div class="card-body">
                                             <div class="mb-3">
                                                 <label for="nama" class="form-label">Nama Lengkap</label>
-                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Lengkap pemesan" required>
+                                                <input type="text" class="form-control" id="nama" name="nm_pelanggan" placeholder="Masukkan Nama Lengkap pemesan" required>
                                             <label for="alamat" class="form-label">Alamat</label>
                                                 <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan Alamat Lengkap Sesuai KTP" required></textarea>
                                                 <label for="email" class="form-label">Email</label>
                                                 <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Valid dan Benar" required>
 
-                                                    <?php 
-                                                    // Iterasi daftar program studi dan menampilkannya sebagai opsi dalam dropdown
-                                                    
-                                            
-                                                    ?>
                                                 </select>
                                             </div>
                                             <label for="telp" class="form-label">Nomor Telepon</label>
                                                 <input type="tel" class="form-control" id="telp" name="telp" placeholder="Masukkan Nomor Telpon/HP" pattern="[0-9+\-\s()]{6,20}" required>
                                             <div class="mb-3">
                                                 <label for="cookies" class="form-label">Menu Cookies</label>
-                                                <select class="form-select" id="cookies" name="cookies" required>
+                                                <select class="form-select" id="cookies" name="daftar_menu" required>
                                                     <option value="" selected disabled>Pilih Menu Cookies</option>
                                                     <?php
                                                     // Iterasi daftar provinsi dan menampilkannya sebagai opsi dalam dropdown
                                                     foreach ($cookiesList as $cookies){
-                                                        echo '<option value="'.$cookies['id'].'">'.$cookies['nama'].'</option>';
+                                                        echo '<option value="'.$cookies['kode_menu'].'">'.$cookies['daftar_menu'].'</option>';
                                                     }
                                                     ?>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="jumlah" class="form-label">Jumlah Pesanan</label>
-                                                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Masukkan jumlah pesanan" required>
+                                                <input type="number" class="form-control" id="jumlah" name="jumlah_pesanan" placeholder="Masukkan jumlah pesanan" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="date" class="form-label">Tanggal Pengiriman</label>
-                                                <input type="date" class="form-control" id="date" name="date" placeholder="Masukkan tanggal pengiriman" pattern="[0-9+\-\s()]{6,20}" required>
+                                                <input type="date" class="form-control" id="date" name="tgl_pengiriman" placeholder="Masukkan tanggal pengiriman" pattern="[0-9+\-\s()]{6,20}" required>
                                             </div>
                                                     
                                                 </select>

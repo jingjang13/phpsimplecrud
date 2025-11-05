@@ -1,8 +1,79 @@
-/* Taruh CSS Custom Disini */
-
 .bg-body-secondary {
-    background-color: rgb(184, 147, 83)!important;
+    background-color: rgb(186, 148, 83)!important;
 }
 .bg-body-tertiary {
-    background-color: rgb(217, 172, 114)!important;
+    background-color: rgba(194, 165, 68, 0.696)!important;
+}
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+.btn-cookie {
+    background-color: #A0522D;
+    color: #FFF8E7;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.btn-cookie:hover {
+    background-color: #C68E17;
+    color: #fff;
+    transform: scale(1.03);
+}
+.form-cookie input[type="text"],
+.form-cookie input[type="email"],
+.form-cookie select {
+    background-color: #FFF8E7;
+    border: 2px solid #A0522D;
+    border-radius: 8px;
+    padding: 0.5rem;
+    color: #5C4033;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.form-cookie input:focus,
+.form-cookie select:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+.table-cookie {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(160, 82, 45, 0.2);
+}
+
+.table-cookie th {
+    background-color: #FFD700;
+    color: #5C4033;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.table-cookie td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #EEDC82;
+    color: #5C4033;
+}
+
+.table-cookie tr:nth-child(even) {
+    background-color: #FFF0DC;
+}
+
+.footer-cookie {
+    background-color: #A0522D;
+    color: #FFF8E7;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    border-top: 4px solid #FFD700;
 }

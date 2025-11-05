@@ -3,10 +3,10 @@
 // Silakan lihat komentar di file data-edit.php untuk penjelasan kode ini, karena struktur dan logikanya serupa.
 include_once 'config/class-master.php';
 $master = new MasterData();
-$dataProvinsi = $master->getUpdateProvinsi($_GET['id']);
+$dataCookies = $master->getUpdateCookies($_GET['kode']);
 if(isset($_GET['status'])){
     if($_GET['status'] == 'failed'){
-        echo "<script>alert('Gagal mengubah data provinsi. Silakan coba lagi.');</script>";
+        echo "<script>alert('Gagal mengubah data Menu Cookies. Silakan coba lagi.');</script>";
     }
 }
 
@@ -31,12 +31,12 @@ if(isset($_GET['status'])){
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-6">
-								<h3 class="mb-0">Edit Provinsi</h3>
+								<h3 class="mb-0">Edit Menu Cookies</h3>
 							</div>
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-end">
 									<li class="breadcrumb-item"><a href="index.php">Beranda</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Edit Provinsi</li>
+									<li class="breadcrumb-item active" aria-current="page">Edit Menu Cookies</li>
 								</ol>
 							</div>
 						</div>
@@ -49,7 +49,7 @@ if(isset($_GET['status'])){
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Formulir Provinsi</h3>
+										<h3 class="card-title">Formulir Menu Cookies</h3>
 										<div class="card-tools">
 											<button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" title="Collapse">
 												<i data-lte-icon="expand" class="bi bi-plus-lg"></i>
@@ -60,16 +60,19 @@ if(isset($_GET['status'])){
 											</button>
 										</div>
 									</div>
-                                    <form action="proses/proses-provinsi.php?aksi=updateprovinsi" method="POST">
+                                    <form action="proses/proses-cookies.php?aksi=updatecookies" method="POST">
 									    <div class="card-body">
-                                            <input type="hidden" name="id" value="<?php echo $dataProvinsi['id']; ?>">
+                                            <div class="mb-3">
+                                                <label for="kode_menu" class="form-label">Kode Menu Cookies</label>
+                                                <input type="varchar" class="form-control-plaintext" id="kode_menu" name="kode_menu" placeholder="Masukkan Kode cookies" value="<?php echo $dataCookies['kode_menu']; ?>" required readonly>
+                                            </div>
 											<div class="mb-3">
-												<label for="nama" class="form-label">Nama Provinsi</label>
-												<input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Program Studi" value="<?php echo $dataProvinsi['nama']; ?>" required>
+												<label for="daftar_menu" class="form-label">Nama Menu Cookies</label>
+												<input type="text" class="form-control" id="daftar_menu" name="daftar_menu" placeholder="Masukkan Nama cookies" value="<?php echo $dataCookies['daftar_menu']; ?>" required>
 											</div>
                                         </div>
 									    <div class="card-footer">
-                                            <button type="button" class="btn btn-danger me-2 float-start" onclick="window.location.href='master-provinsi-list.php'">Batal</button>
+                                            <button type="button" class="btn btn-danger me-2 float-start" onclick="window.location.href='master-cookies-list.php'">Batal</button>
                                             <button type="submit" class="btn btn-warning float-end">Update Data</button>
                                         </div>
                                     </form>

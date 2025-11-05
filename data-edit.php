@@ -1,20 +1,19 @@
 <?php 
 
 include_once 'config/class-master.php';
-include_once 'config/class-mahasiswa.php';
+include_once 'config/class-cookiejoy.php';
 $master = new MasterData();
-$mahasiswa = new Mahasiswa();
-// Mengambil daftar program studi, provinsi, dan status mahasiswa
-$prodiList = $master->getCookies();
-// Mengambil daftar provinsi
-$provinsiList = $master->getPelanggan();
-// Mengambil daftar status mahasiswa
+$cookiejoy = new Cookiejoy();
 
-// Mengambil data mahasiswa yang akan diedit berdasarkan id dari parameter GET
-$dataMahasiswa = $mahasiswa->getUpdateMahasiswa($_GET['id']);
+// Mengambil daftar cookies dan pelanggan
+$cookiesList = $master->getCookies();
+$pelangganList = $master->getPelanggan();
+
+// Mengambil data cookiesjoy yang akan diedit berdasarkan id dari parameter GET
+$dataCookiejoy = $cookiejoy->getUpdateCookiesjoy($_GET['id']);
 if(isset($_GET['status'])){
     if($_GET['status'] == 'failed'){
-        echo "<script>alert('Gagal mengubah data mahasiswa. Silakan coba lagi.');</script>";
+        echo "<script>alert('Gagal mengubah data cookiesjoy. Silakan coba lagi.');</script>";
     }
 }
 ?>
@@ -69,34 +68,29 @@ if(isset($_GET['status'])){
 									</div>
                                     <form action="proses/proses-edit.php" method="POST">
 									    <div class="card-body">
-                                            <input type="hidden" name="id" value="<?php echo $dataMahasiswa['id']; ?>">
+                                            <input type="hidden" name="id" value="<?php echo $dataCookiesjoy['id_cookiesjoy']; ?>">
                                            <div class="mb-3">
                                                 <label for="nama" class="form-label">Nama Lengkap</label>
-                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Lengkap Mahasiswa" value="<?php echo $dataMahasiswa['nama']; ?>" required>
+                                                <input type="text" class="form-control" id="nama" name="nm_pelanggan" placeholder="Masukkan Nama Lengkap Mahasiswa" value="<?php echo $dataCookiesjoy['nama']; ?>" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="alamat" class="form-label">Alamat</label>
-                                                <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan Alamat Lengkap Sesuai KTP" required><?php echo $dataMahasiswa['alamat']; ?></textarea>
+                                                <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan Alamat Lengkap Sesuai KTP" required><?php echo $dataCookiejoy['alamat']; ?></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Valid dan Benar" value="<?php echo $dataMahasiswa['email']; ?>" required>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Valid dan Benar" value="<?php echo $dataCookiejoy['email']; ?>" required>
                                             </div>
-                                                    <?php 
-                                                    // Iterasi daftar program studi dan menandai yang sesuai dengan data mahasiswa yang dipilih
                                                     
-                                                        // Menampilkan opsi program studi dengan penanda yang sesuai
-                                                    }
-                                                    ?>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="telp" class="form-label">Nomor Telepon</label>
-                                                <input type="tel" class="form-control" id="telp" name="telp" placeholder="Masukkan Nomor Telpon/HP" value="<?php echo $dataMahasiswa['telp']; ?>" pattern="[0-9+\-\s()]{6,20}" required>
+                                                <input type="telp" class="form-control" id="telp" name="telp" placeholder="Masukkan Nomor Telpon/HP" value="<?php echo $dataCookiejoy['telp']; ?>" pattern="[0-9+\-\s()]{6,20}" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="cookies" class="form-label">Menu Cookies</label>
-                                                <select class="form-select" id="cookies" name="cookies" required>
+                                                <select class="form-select" id="cookies" name="daftar_menu" required>
                                                     <option value="" selected disabled>Pilih Menu Cookies</option>
                                                     <?php
                                                     // Iterasi daftar provinsi dan menandai yang sesuai dengan data mahasiswa yang dipilih
@@ -104,23 +98,23 @@ if(isset($_GET['status'])){
                                                         // Menginisialisasi variabel kosong untuk menandai opsi yang dipilih
                                                         $selectedCookies = "";
                                                         // Mengecek apakah provinsi saat ini sesuai dengan data mahasiswa
-                                                        if($dataMahasiswa['cookies'] == $cookies['id']){
+                                                        if($dataCookies['cookies'] == $cookies['kode_menu']){
                                                             // Jika sesuai, tandai sebagai opsi yang dipilih
                                                             $selectedCookies = "selected";
                                                         }
                                                         // Menampilkan opsi provinsi dengan penanda yang sesuai
-                                                        echo '<option value="'.$cookies['id'].'" '.$selectedCookies.'>'.$cookies['nama'].'</option>';
+                                                        echo '<option value="'.$cookies['kode_menu'].'" '.$selectedCookies.'>'.$cookies['daftar_menu'].'</option>';
                                                     }
                                                     ?>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="jumlah" class="form-label">Jumlah Pesanan</label>
-                                                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Masukkan jumlah pesanan" value="<?php echo $dataMahasiswa['jumlah']; ?>" required>
+                                                <input type="number" class="form-control" id="jumlah" name="jumlah_pesanan" placeholder="Masukkan jumlah pesanan" value="<?php echo $dataCookiesjoy['jumlah']; ?>" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="date" class="form-label">Tanggal Pengiriman</label>
-                                                <input type="date" class="form-control" id="date" name="date" placeholder="Masukkan tanggal pengiriman" value="<?php echo $dataMahasiswa['telp']; ?>" pattern="[0-9+\-\s()]{6,20}" required>
+                                                <input type="date" class="form-control" id="date" name="tgl_pengiriman" placeholder="Masukkan tanggal pengiriman" value="<?php echo $dataCookiejoy['telp']; ?>" pattern="[0-9+\-\s()]{6,20}" required>
                                             </div>
                                             
                                                     
