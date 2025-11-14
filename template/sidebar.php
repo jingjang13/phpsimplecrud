@@ -44,7 +44,7 @@
                 <li class="nav-item">
                     <a href="master-pelanggan-list.php" class="nav-link">
                         <i class="nav-icon bi bi-briefcase-fill"></i>
-                        <p>Pelanggan</p>
+                        <p>Daftar Member</p>
                     </a>
                 </li>
             </ul>

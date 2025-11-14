@@ -63,12 +63,33 @@ if(isset($_GET['status'])){
 												<label for="nm_pelanggan" class="form-label">Nama Pelanggan</label>
 												<input type="text" class="form-control" id="nm_pelanggan" name="nm_pelanggan" placeholder="Masukkan Nama Pelanggan" required>
 											</div>
-                                        </div>
-									    <div class="card-footer">
+										<div class="mb-3">
+											<label for="alamat" class="form-label">Alamat</label>
+											<input type="text" class="form-control" id="alamat" name="alamat"
+											placeholder="Masukkan Alamat Pelanggan" required>
+										</div>
+
+										<div class="mb-3">
+											<label for="email" class="form-label">Email</label>
+											<input type="email" class="form-control" id="email" name="email" 
+											placeholder="Masukkan Email Pelanggan" required>
+										</div>
+										<div class="mb-3">
+											<label for="telp" class="form-label">Telepon</label>
+											<input type="text" class="form-control" id="telp" name="telp" 
+											placeholder="Masukkan No Telp Pelanggan" required>
+										</div>
+										<div class="mb-3">
+											<label for="tgl_daftar" class="form-label">Tanggal Daftar</label>
+											<input type="date" class="form-control" id="tgl_daftar" name="tgl_daftar"
+											placeholder="Masukkan tgl Pelanggan daftar " required>
+										</div>
+										</div>
+										<div class="card-footer">
                                             <button type="button" class="btn btn-danger me-2 float-start" onclick="window.location.href='master-pelanggan-list.php'">Batal</button>
                                             <button type="reset" class="btn btn-secondary me-2 float-start">Reset</button>
                                             <button type="submit" class="btn btn-primary float-end">Submit</button>
-                                        </div>
+										</div>
                                     </form>
 								</div>
 							</div>

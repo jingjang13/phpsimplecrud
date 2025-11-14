@@ -82,59 +82,79 @@ class MasterData extends Database {
     // DAFTAR PELANGGAN//
     // Method untuk mendapatkan daftar pelanggan
     public function getPelanggan(){
-        $query = "SELECT * FROM tb_pelanggan";
-        $result = $this->conn->query($query);
-        $pelanggan = [];
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $pelanggan[] = [
-                    'id_pelanggan' => $row['id_pelanggan'],
-                    'nm_pelanggan' => $row['nm_pelanggan']
-                ];
-            }
+    $query = "SELECT id_pelanggan, nm_pelanggan, alamat, email, telp, tgl_daftar 
+              FROM tb_pelanggan
+              ORDER BY id_pelanggan DESC";
+
+    $result = $this->conn->query($query);
+    $data = [];
+
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
         }
-        return $pelanggan;
     }
+
+    return $data;
+}
+
     // Method untuk input data pelanggan
     public function inputPelanggan($data){
-        $namaPelanggan = $data['nm_pelanggan'];
-        $query = "INSERT INTO tb_pelanggan (nm_pelanggan) VALUES (?)";
-        $stmt = $this->conn->prepare($query);
-        if(!$stmt) return false;
-        $stmt->bind_param("s", $namaPelanggan);
-        $result = $stmt->execute();
-        $stmt->close();
-        return $result;
-    }
+    $nama = $data['nm_pelanggan'];
+    $alamat = $data['alamat'];
+    $email = $data['email'];
+    $telp = $data['telp'];
+    $tgl = $data['tgl_daftar'];
+
+    $query = "INSERT INTO tb_pelanggan (nm_pelanggan, alamat, email, telp, tgl_daftar) 
+              VALUES (?, ?, ?, ?, ?)";
+
+    $stmt = $this->conn->prepare($query);
+    if(!$stmt) return false;
+
+    $stmt->bind_param("sssss", $nama, $alamat, $email, $telp, $tgl);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
 
     // Method untuk mendapatkan data pelanggan berdasarkan id
     public function getUpdatePelanggan($id){
         $query = "SELECT * FROM tb_pelanggan WHERE id_pelanggan = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt) return false;
+
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
         $pelanggan = null;
+
         if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            $pelanggan = [
-                'id_pelanggan' => $row['id_pelanggan'],
-                'nm_pelanggan' => $row['nm_pelanggan']
-            ];
+            $pelanggan = $result->fetch_assoc();
         }
+
         $stmt->close();
         return $pelanggan;
     }
 
+
     // Method untuk mengedit data pelanggan
     public function updatePelanggan($data){
-        $idPelanggan = $data['id_pelanggan'];
-        $nmPelanggan = $data['nm_pelanggan'];
-        $query = "UPDATE tb_pelanggan SET nm_pelanggan = ? WHERE id_pelanggan = ?";
+        $id = $data['id_pelanggan'];
+        $nama = $data['nm_pelanggan'];
+        $alamat = $data['alamat'];
+        $email = $data['email'];
+        $telp = $data['telp'];
+        $tgl = $data['tgl_daftar'];
+
+        $query = "UPDATE tb_pelanggan 
+                SET nm_pelanggan = ?, alamat = ?, email = ?, telp = ?, tgl_daftar = ?
+                WHERE id_pelanggan = ?";
+
         $stmt = $this->conn->prepare($query);
         if(!$stmt) return false;
-        $stmt->bind_param("si", $nmPelanggan, $idPelanggan);
+
+        $stmt->bind_param("sssssi", $nama, $alamat, $email, $telp, $tgl, $id);
         $result = $stmt->execute();
         $stmt->close();
         return $result;

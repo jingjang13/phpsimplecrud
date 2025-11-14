@@ -28,30 +28,31 @@ class Cookiejoy extends Database {
 
     // Method untuk mengambil semua data cookiejoy
     public function getAllCookiejoy(){
-        // Menyiapkan query SQL untuk mengambil data cookiejoy beserta cookies dan pelanggan
-        $query = "SELECT 
-              id_pemesanan,
-              nm_pelanggan,
-              alamat,
-              email,
-              telp,
-              daftar_menu,
-              jumlah_pesanan,
-              tgl_pengiriman
-          FROM tb_pemesanan
-          ORDER BY id_pemesanan DESC";
+    $query = "SELECT 
+        p.id_pemesanan,
+        p.nm_pelanggan,
+        p.alamat,
+        p.email,
+        p.telp,
+        p.daftar_menu,
+        c.daftar_menu AS nama_menu,
+        p.jumlah_pesanan,
+        p.tgl_pengiriman
+    FROM tb_pemesanan p
+    LEFT JOIN tb_cookies c
+        ON p.daftar_menu = c.kode_menu
+    ORDER BY p.id_pemesanan DESC";
 
-        $result = $this->conn->query($query);
+    $result = $this->conn->query($query);
 
-        $data = [];
-
-        if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
         }
-        return $data;
     }
+    return $data;
+}
 
     // === GET DATA BY ID === //
     public function getUpdatecookiesjoy($id) {
@@ -82,28 +83,49 @@ class Cookiejoy extends Database {
     }
 
     // === UPDATE DATA === //
-    public function editCookiejoy($data) {
-        $id             = $data['id_pemesanan'];
-        $nmPelanggan    = $data['nm_pelanggan'];
-        $alamat         = $data['alamat'];
-        $email          = $data['email'];
-        $telp           = $data['telp'];
-        $mnPemesanan    = $data['daftar_menu'];
-        $jumlahPesanan  = $data['jumlah_pesanan'];
-        $tglPengiriman  = $data['tgl_pengiriman'];
+public function editCookiejoy($data) {
+    $idPemesanan    = $data['id_pemesanan'];
+    $nmPelanggan    = $data['nm_pelanggan'];
+    $alamat         = $data['alamat'];
+    $email          = $data['email'];
+    $telp           = $data['telp'];
+    $mnPemesanan    = $data['daftar_menu'];
+    $jumlahPesanan  = $data['jumlah_pesanan'];
+    $tglPengiriman  = $data['tgl_pengiriman'];
 
-        $query = "UPDATE tb_pemesanan 
-                  SET id_pemesanan = ,nm_pelanggan = ?, alamat = ?, email = ?, telp = ?, daftar_menu = ?, jumlah_pesanan = ?, tgl_pengiriman = ?
-                  WHERE id_pemesanan = ?";
-        $stmt = $this->conn->prepare($query);
-        if (!$stmt) return false;
+    $query = "UPDATE tb_pemesanan 
+              SET nm_pelanggan = ?, 
+                  alamat = ?, 
+                  email = ?, 
+                  telp = ?, 
+                  daftar_menu = ?, 
+                  jumlah_pesanan = ?, 
+                  tgl_pengiriman = ?
+              WHERE id_pemesanan = ?";
 
-        $stmt->bind_param("sssssisi", $nmPelanggan, $alamat, $email, $telp, $mnPemesanan, $jumlahPesanan, $tglPengiriman, $id);
-        $result = $stmt->execute();
-        $stmt->close();
+    $stmt = $this->conn->prepare($query);
+    if (!$stmt) return false;
 
-        return $result;
-    }
+   $stmt->bind_param(
+    "sssssisi", 
+    $nmPelanggan, 
+    $alamat, 
+    $email, 
+    $telp, 
+    $mnPemesanan, 
+    $jumlahPesanan, 
+    $tglPengiriman, 
+    $idPemesanan
+);
+
+
+
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+}
+
 
     // === DELETE DATA === //
     public function deleteCookiejoy($id) {

@@ -62,7 +62,7 @@ if(isset($_GET['status'])){
 									</div>
                                     <form action="proses/proses-pelanggan.php?aksi=updatepelanggan" method="POST">
 									    <div class="card-body">
-                                            <input type="hidden" name="id" value="<?php echo $dataPelanggan['id']; ?>">
+                                            <input type="hidden" name="id_pelanggan" value="<?php echo $dataPelanggan['id_pelanggan']; ?>"required>
 											<div class="mb-3">
 												<label for="nm_pelanggan" class="form-label">Nama Pelanggan</label>
 												<input type="text" class="form-control" id="nm_pelanggan" name="nm_pelanggan" placeholder="Masukkan Nama Pelanggan" value="<?php echo $dataPelanggan['nm_pelanggan']; ?>" required>

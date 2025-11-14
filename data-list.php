@@ -77,7 +77,7 @@ $dataCookiejoy = $cookiejoy->getAllCookiejoy();
 													<th>Alamat</th>
 													<th>Email</th>
 													<th>Telp</th>
-													<th>Menu</th>
+													<th>Menu_Pesanan</th>
 													<th>Jumlah_Pesanan</th>
 													<th>Tgl_Pengiriman</th>
 													<th class="text-center">Aksi</th>
@@ -97,7 +97,7 @@ $dataCookiejoy = $cookiejoy->getAllCookiejoy();
 																<td>'.$cookiejoy['alamat'].'</td>
 																<td>'.$cookiejoy['email'].'</td>
 																<td>'.$cookiejoy['telp'].'</td>
-																<td>'.$cookiejoy['daftar_menu'].'</td>
+																<td>'.$cookiejoy['nama_menu'].'</td>
 																<td>'.$cookiejoy['jumlah_pesanan'].'</td>
 																<td>'.$cookiejoy['tgl_pengiriman'].'</td>
 																<td class="text-center">

@@ -72,6 +72,10 @@ $dataPelanggan = $master->getPelanggan();
 												<tr>
 													<th>No</th>
 													<th>Nama</th>
+													<th>Email</th>
+													<th>Telepon</th>
+													<th>Alamat</th>
+													<th>Tanggal Daftar</th>
 													<th class="text-center">Aksi</th>
 												</tr>
 											</thead>
@@ -82,13 +86,17 @@ $dataPelanggan = $master->getPelanggan();
 															<td colspan="3" class="text-center">Tidak ada data pelanggan.</td>
 														</tr>';
 													} else {
-														foreach ($dataPelanggan as $index => $p){
+														foreach ($dataPelanggan as $index => $pelanggan){
 															echo '<tr class="align-middle">
 																<td>'.($index + 1).'</td>
-																<td>'.$p['nm_pelanggan'].'</td>
+																<td>'.$pelanggan['nm_pelanggan'].'</td>
+																<td>'.$pelanggan['email'].'</td>
+																<td>'.$pelanggan['telp'].'</td>
+																<td>'.$pelanggan['alamat'].'</td>
+																<td>'.$pelanggan['tgl_daftar'].'</td>
 																<td class="text-center">
-																	<button type="button" class="btn btn-sm btn-warning me-1" onclick="window.location.href=\'master-pelanggan-edit.php?id='.$p['id_pelanggan'].'\'"><i class="bi bi-pencil-fill"></i> Edit</button>
-																	<button type="button" class="btn btn-sm btn-danger" onclick="if(confirm(\'Yakin ingin menghapus data Menu Cookies ini?\')){window.location.href=\'proses/proses-pelanggan.php?aksi=deletepelanggan&id='.$p['id_pelanggan'].'\'}"><i class="bi bi-trash-fill"></i> Hapus</button>
+																	<button type="button" class="btn btn-sm btn-warning me-1" onclick="window.location.href=\'master-pelanggan-edit.php?id='.$pelanggan['id_pelanggan'].'\'"><i class="bi bi-pencil-fill"></i> Edit</button>
+																	<button type="button" class="btn btn-sm btn-danger" onclick="if(confirm(\'Yakin ingin menghapus data Menu Cookies ini?\')){window.location.href=\'proses/proses-pelanggan.php?aksi=deletepelanggan&id='.$pelanggan['id_pelanggan'].'\'}"><i class="bi bi-trash-fill"></i> Hapus</button>
 																</td>
 															</tr>';
 														}
